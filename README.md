@@ -1,4 +1,4 @@
-# Practical Comparative Structural Modleling
+# Practical Comparative Structural Modelling
 
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
@@ -6,9 +6,9 @@
 ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
 ### Introduction
 
-Welcome to the Homology Modeling Project on GitHub! Our project is dedicated to predict the three-dimensional structure of α-amylase (AA) from Alteromonas haloplanktis, an enzyme found in Gram-negative bacteria thriving in Antarctica's icy waters, using computational methods. We'll then compare our predictions with experimental X-ray crystallography data.
+Welcome to the Homology Modeling Project on GitHub! Our project is dedicated to predicting the three-dimensional structure of α-amylase (AA) from Alteromonas haloplanktis, an enzyme found in Gram-negative bacteria thriving in Antarctica's icy waters, using computational methods. We'll then compare our predictions with experimental X-ray crystallography data.
 
-Homology modeling, also known as comparative modeling, is a method used to predict the 3D structure of a protein with an unknown structure by using the known structure of a homologous protein.
+Homology modelling, also known as comparative modelling, is a method used to predict the 3D structure of a protein with an unknown structure by using the known structure of a homologous protein.
 
 <p align="center">
   <img src="images/images.png" alt="Image" />
@@ -17,25 +17,25 @@ Homology modeling, also known as comparative modeling, is a method used to predi
 
 
 
-Throughout this project, we'll follow these essential steps in the homology modeling workflow:
+Throughout this project, we'll follow these essential steps in the homology modelling workflow:
 
-1.Template Selection: Identifying suitable templates from protein structure databases.
+1. Template Selection: Identifying suitable templates from protein structure databases.
 
-2.Pairwise Alignment: Aligning the target α-amylase sequence with selected templates .
+2. Pairwise Alignment: Aligning the target α-amylase sequence with selected templates.
 
-3.Model Building: Constructing homology models based on the alignment using modeller.
+3. Model Building: Constructing homology models based on the alignment using modeller.
 
-4.Quality Assessment: Evaluating the quality and reliability of the generated models through various metrics, refining them as necessary for accuracy.
+4. Quality Assessment: Evaluating the quality and reliability of the generated models through various metrics, refining them as necessary for accuracy.
 
-Join us as we delve into the fascinating world of homology modeling and explore the structure-function relationship of α-amylase from Alteromonas haloplanktis. Let's unlock the secrets hidden within protein structures!
+Join us as we delve into the fascinating world of homology modelling and explore the structure-function relationship of α-amylase from Alteromonas haloplanktis. Let's unlock the secrets hidden within protein structures!
 
 ### Template Selection :
-As mentioned previously, our focus centers on the specific instance of α-amylase (AA) derived from Alteromonas haloplanktis. 
+As mentioned previously, our focus centres on the specific instance of α-amylase (AA) derived from Alteromonas haloplanktis. 
 
-#### 1.Get Protein Sequence 
+#### 1. Get Protein Sequence 
 - To obtain the corresponding protein sequence in FASTA format, we'll utilize the UniProt database, leveraging the unique **accession number P29957**. This will be facilitated through the execution of a shell script named **'download_alpha.sh'** 
-#### 2.Remove Signal Peptides :
-- Removing signal peptides from a FASTA sequence is a common preprocessing step in bioinformatics and computational biology,when predicting the three-dimensional structure of a protein or conducting homology modeling, including the signal peptide can introduce inaccuracies. Signal peptides are typically cleaved off during protein maturation, so modeling the mature form without the signal peptide is more appropriate.
+#### 2. Remove Signal Peptides :
+- Removing signal peptides from a FASTA sequence is a common preprocessing step in bioinformatics and computational biology, when predicting the three-dimensional structure of a protein or conducting homology modelling, including the signal peptide can introduce inaccuracies. Signal peptides are typically cleaved off during protein maturation, so modelling the mature form without the signal peptide is more appropriate.
 The location of the signal peptide can be identified in UniProt annotations. Typically, it spans from the beginning of the sequence to a specific position, such as amino acid residues 1 to 24, as indicated in the UniProt annotation [https://doi.org/10.1016/s0021-9258(18)42754-8].
 
 <p align="center">
@@ -48,9 +48,9 @@ The location of the signal peptide can be identified in UniProt annotations. Typ
 
 To automate the removal of signal peptides, we'll utilize a shell script named **remove_signal.sh**, which will parse the UniProt annotation to identify the signal peptide's start and end positions. Then, it will extract the mature portion of the protein sequence, excluding the signal peptide. This preprocessing step ensures that subsequent analyses are performed on the mature protein form, free from signal peptides.
 the output of the **remove_signal.sh** is our clean sequance target called  **"target.fasta"**
- #### 3.  Search for an homologous proteins (template)of our target sequence using BLAST :
+ #### 3.  Search for a homologous protein (template)of our target sequence using BLAST :
 
- After identifying template candidates, the next step is to select the best structures for homology modeling. While sequence similarity between the template and target sequences is crucial for generating accurate 3D structures, it's not the sole determinant of modeling accuracy. 
+ After identifying template candidates, the next step is to select the best structures for homology modelling. While sequence similarity between the template and target sequences is crucial for generating accurate 3D structures, it's not the sole determinant of modelling accuracy. 
 #### A.Perform BLAST Search: 
 Using the target  clean sequence **"target.fasta"** as a query, conduct a BLAST search against relevant protein databases PDB.
 
