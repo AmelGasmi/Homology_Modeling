@@ -10,7 +10,7 @@ data_dir = "C:\\Users\\AH-INFO\\practical_comparative\\data"
 # Define the full path to the alignment file
 env.io.atom_files_directory =[data_dir]
 a = automodel(env,
-              alnfile='query-1c8q.ali',
+              alnfile='query-1c8q.pir',
               knowns='1C8Q',
               sequence='AMY_PSEHA',
               assess_methods=(assess.DOPE,

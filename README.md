@@ -84,48 +84,27 @@ Using the target  clean sequence **"target.fasta"** as a query, conduct a BLAST 
  #### 1. Model Selection
  After generating 10 similar models of AMY_PSEHA based on the 1c8q:A template structure, the log file  **build.log** provides a summary of all the models constructed. Each model is listed with its corresponding filename, which contains the coordinates of the model in PDB format, along with its associated scores.
 
- To select the "best" model, we can consider various criteria. For instance, we may opt for the model with the lowest DOPE score or the highest GA341 assessment score, both of which are presented at the end of the log file **build.log**. In this case, we'll choose the best solution based on the lowest DOPE score value.
+ To select the "best" model, we can consider various criteria. For instance, we may opt for the model with the lowest DOPE score or the highest GA341 assessment score, both of which are presented at the end of the log file **build.log**. In this case, we'll choose the best solution based on the highest GA341 score value.
 
  The provided command accomplishes this selection process:
 
  ```sh 
- grep -v 'Filename' build.log | sort -n -k 3 | head -n 1 | awk '{print $1,$3}'")
+ grep -v 'Filename' build.log | sort -n -k 3 | head -n 1 | awk '{print $1,$4}'")
  ```
- - The model with the lowest DOPE score is AMY_PSEHA.B99990007.pdb is the output of the command shows:
- <p align="center">
-  <img src="images/grep.png"
-       alt="Image"
-       title="Output of grep command" />      
-</p>
+ - The model with the highest GA341 score is AMY_PSEHA.B99990007.pdb is the output of the command 
 
  After choosing this model, we will rename it as **model.pdb**
 
 
 #### 2. Check stereochemical quality
 The overall quality and the individual regions of the a model should
-be assessed. This is an essential part for the correct interpretation of the model.
+ be assessed. This is an essential part for the correct interpretation of the model.
  The fist step, is to check stereochemical quality by establishing the Ramachandran plot.
  Ramachandran plot can be used for evaluating the accuracy of predicted protein structure. Several tools and servers, such as PDBsum server, MolProbity, STAN Server, and others, are used to generate Ramachandran plot.
 
   - Submit our selected model to the web server at [https://swissmodel.expasy.org/assess)](https://swissmodel.expasy.org/assess) and we will  check for its stereo chemical validity.
   
-
-  The analysis reveals that 90.36% of residues (Ramachandran favored) are within the most favored regions. However, 3.30% (Ramachandran outliers) of residues deviate from the ideal conformation.
-
-  These outliers include residues A 129 VAL, A 66 MET, A 243 THR, A 209 PHE, A 342 GLU, A 354 PRO, A 357 ILE, A 102 ASN, A 301 ARG, A 155 MET, A 182 MET, A 273 ILE, and A 299 UFE.
-
-  Additionally, 2.19% of residues are considered as rotamer outliers, among which are A 198 VAL, A 391 ASN, A 13 TRP, A 66 MET, A 74 ILE, A 27 LYS, and A 362 LYS.
-
-  Moreover, there are five residues exhibiting C-beta deviations: A 313 PRO, A 185 TYR, A 198 VAL, A 190 ASP, and A 299 LEU.
-
-  Furthermore, there is one bad bond observed (1/3072) between residues A 155 MET and A 156 PRO.
-
-  In terms of bad angles, there are 81 instances out of 4189, involving various residues such as A 120 ASN, A 43 PHE, A 276 ASN, A 45 ASP, A 131 ASP, and many others, including some residue pairs like A 107 THR-A 108 ILE and A 366 GLY-A 367 TRP.
-
-  Additionally, two non-proline cis bonds were identified among 384 bonds: (A 45 ASP-A 46 MET) and (A 121 GLY-A 122 SER).
-
-  Overall, these deviations highlight areas where remodeling or energy minimization may be necessary to enhance the stereochemical properties of the protein model.
- 
+ The Ramachandran analysis of the protein structure indicates that the majority, accounting for 90.86% of residues, resides within energetically favored regions, suggesting overall good backbone conformation. However, a small portion, approximately 3.30%, falls into the outlier category, indicating deviations from expected torsion angles. While the high percentage of residues in favored regions is promising, the presence of outliers highlights areas of potential structural inaccuracies or modeling errors. Despite this, the overall assessment leans towards a reasonably good quality protein structure, but further refinement and optimization may be beneficial to enhance its accuracy and reliability
 <p align="center">
   <img src="images/01_general_A.png"
        alt="Image"
@@ -133,9 +112,9 @@ be assessed. This is an essential part for the correct interpretation of the mod
 </p>
    
 
-  >**In conclusion**, while the majority of residues conform to the most favored regions according to Ramachandran analysis, there are significant deviations present in the form of outliers, rotamer outliers, C-beta deviations, bad bonds, bad angles, and non-proline cis bonds. These deviations indicate areas where the model may not accurately represent the true conformation of the protein. Remodeling or energy minimization techniques may be necessary to improve the stereochemical properties of the protein model and enhance its accuracy and reliability.
 
-#### 3.  Check The local quality of the model :
+#### 3.  Check The  quality of the model :
+ - **Overall model quality** 
 
  PROSA web server is a tool that predicts the Z-score (overall quality of the protein) and residue wise energy in the plotted form .
   - Submit our selected model to the Prosa web server : [https://prosa.services.came.sbg.ac.at/prosa.php]
@@ -143,14 +122,28 @@ be assessed. This is an essential part for the correct interpretation of the mod
   The  Z-score  was  used  for  overall  model  quality 
   evaluation. Its  value is  displayed in a  plot containing the  Z-score of all experimentally determined protein chains in  the  current PBB.  In  this  plot, the  groups  of  structures 
   from  different  sources  are  distinguished  by  different colours, which can be  used to check whether the  Z-score of  the input  structure is  within  the range  of  the source typically found for the native proteins of similar size. The 
-  value of Z-score is highlighted as a black dot in the figure below The Z score value of the obtained model  is −1.18 an acceptable range, indicating that the predicted structure's energy is within the range of energies observed in experimental structures .
+  value of Z-score is highlighted as a black dot in the figure below .
+  The Z score value of the obtained model  is -4.87. 
+
+  A Z-score of -4.87 suggests that the model's energy is significantly lower (i.e., more negative) than the average energy of experimental structures of similar size. In the context of ProSA-web, a lower Z-score indicates a higher likelihood of the model being erroneous or having structural irregularities. Typically, a Z-score below -4 indicates potential issues with the model's structure, suggesting that it may contain inaccuracies or distortions.
+
+  Therefore, based on the ProSA-web analysis, the model may have structural problems that need to be addressed. Further refinement or optimization techniques, such as molecular dynamics simulations or energy minimization, may be necessary to improve the model's quality and reliability.
 
 <p align="center">
   <img src="images/res.png" alt="Image"
        titlr=" The Z score plot represents Z score value of proteins" />
 </p>
+ 
+ - **Local model quality** 
 
-#### 4.
+<p align="center">
+  <img src="images/local.png" alt="Image"
+       title="Local model quality" />
+</p>
+
+
+
+#### 4. Algin 3D Model
  To get a view about how powerful the homology modeling is, we will align the 3D model of α-amylase **1AQM** with the experimentally solved structure.
  - Open the model, the crystal and the template structures in a new PyMol session and enter the following commands:
  
@@ -162,19 +155,21 @@ align mob_model, reference
  - PyMOL uses a two-step approach for aligning structures: first, it performs a sequence alignment, and then it minimizes the Root Mean Square Deviation (RMSD) between the aligned residues. As a result, you will get the structures aligned in the display and something like this will be printed to the console.
  
  ```
- align mob_model, reference
- Match: read scoring matrix.
+  Match: read scoring matrix.
  Match: assigning 396 x 449 pairwise scores.
  MatchAlign: aligning residues (396 vs 449)...
  MatchAlign: score 1356.500
  ExecutiveAlign: 280 atoms aligned.
- ExecutiveRMS: 2 atoms rejected during cycle 1 (RMSD=21.94).
- ExecutiveRMS: 1 atoms rejected during cycle 2 (RMSD=21.67).
- Executive: RMSD =   21.537 (277 to 277 atoms)  
+ ExecutiveRMS: 25 atoms rejected during cycle 1 (RMSD=8.61).
+ ExecutiveRMS: 20 atoms rejected during cycle 2 (RMSD=6.51).
+ ExecutiveRMS: 23 atoms rejected during cycle 3 (RMSD=4.99).
+ ExecutiveRMS: 19 atoms rejected during cycle 4 (RMSD=3.54).
+ ExecutiveRMS: 13 atoms rejected during cycle 5 (RMSD=2.51).
+ Executive: RMSD =    2.010 (180 to 180 atoms) 
 ```
 the RMSD value of 21.537 Å suggests a relatively high level of deviation between the model (mob_model) and the reference structure. Ideally, a lower RMSD value indicates better structural similarity. The rejection of a few atoms during the alignment process may indicate areas of discrepancy or misalignment between the model and the reference structure.
 <p align="center">
-  <img src="images/alignpymol1.png" alt="Image" />
+  <img src="images/align2.png" alt="Image" />
 </p>
 
 

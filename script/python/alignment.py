@@ -6,8 +6,8 @@ data_dir = "C:\\Users\\AH-INFO\\practical_comparative\\data"
 # Initialize MODELLER environment
 env = environ()
 
-# Read the template (model) file
-template_file = data_dir + "\\template.pdb"
+# Read the template (model) fileq
+template_file = data_dir + "\\1c8q.pdb"
 mdl = model(env, file=template_file, model_segment=('FIRST:A','LAST:A'))
 
 # Read the target sequence file
@@ -16,7 +16,7 @@ aln = alignment(env)
 aln.append(file=target_sequence_file, align_codes='AMY_PSEHA')
 
 # Perform sequence alignment
-aln.append_model(mdl, align_codes='1C8Q', atom_files='1c8q')
+aln.append_model(mdl, align_codes='1C8Q', atom_files='1c8q.pdb')
 aln.align2d()
 
 # Write alignments

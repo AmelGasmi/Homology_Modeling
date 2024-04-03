@@ -23,7 +23,7 @@
 Kind, OS, HostName, Kernel, Processor: 4, Windows Vista build 9200, DESKTOP-8LA5EM5, SMP, unknown
 Date and time of compilation         : 2024/01/20 00:12:57
 MODELLER executable type             : x86_64-w64
-Job starting time (YY/MM/DD HH:MM:SS): 2024/03/29 17:48:41
+Job starting time (YY/MM/DD HH:MM:SS): 2024/04/02 21:59:29
 
 environ____W> The class 'environ' is deprecated; use 'Environ' instead
 model______W> The class 'model' is deprecated; use 'Model' instead
@@ -49,4 +49,4 @@ Pairwise dynamic programming alignment (ALIGN2D):
   Break-break bonus        :   10000.0000
   Length of alignment      :          495
   Score                    :  179831.0000
-Total CPU time [seconds]                                 :     395.05
+Total CPU time [seconds]                                 :     345.17
