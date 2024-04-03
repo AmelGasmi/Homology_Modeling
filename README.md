@@ -104,7 +104,7 @@ The overall quality and the individual regions of the a model should
 
   - Submit our selected model to the web server at [https://swissmodel.expasy.org/assess)](https://swissmodel.expasy.org/assess) and we will  check for its stereo chemical validity.
   
- The Ramachandran analysis of the protein structure indicates that the majority, accounting for 90.86% of residues, resides within energetically favored regions, suggesting overall good backbone conformation. However, a small portion, approximately 3.30%, falls into the outlier category, indicating deviations from expected torsion angles. While the high percentage of residues in favored regions is promising, the presence of outliers highlights areas of potential structural inaccuracies or modeling errors. Despite this, the overall assessment leans towards a reasonably good quality protein structure, but further refinement and optimization may be beneficial to enhance its accuracy and reliability
+ The homology model of the protein, based on the Ramachandran analysis, appears to be of good quality. With approximately 94.16% of residues falling within favored regions and only 1.57% classified as outliers, the majority of the protein structure adopts energetically favorable conformations with minimal deviations in backbone torsion angles. Additionally, the low percentage of rotamer outliers (1.65%) suggests relatively few deviations in side-chain conformations. However, the identification of four residues with C-beta deviations and a few instances of bad bonds and angles indicates areas for potential improvement. Overall, while the model shows promising characteristics, further refinement techniques may be beneficial to address the identified deviations and enhance the accuracy and reliability of the protein structure.
 <p align="center">
   <img src="images/01_general_A.png"
        alt="Image"
@@ -119,15 +119,10 @@ The overall quality and the individual regions of the a model should
  PROSA web server is a tool that predicts the Z-score (overall quality of the protein) and residue wise energy in the plotted form .
   - Submit our selected model to the Prosa web server : [https://prosa.services.came.sbg.ac.at/prosa.php]
 
-  The  Z-score  was  used  for  overall  model  quality 
-  evaluation. Its  value is  displayed in a  plot containing the  Z-score of all experimentally determined protein chains in  the  current PBB.  In  this  plot, the  groups  of  structures 
+  The  Z-score  was  used  for  overall  model  quality sevaluation. Its  value is  displayed in a  plot containing the  Z-score of all experimentally determined protein chains in  the  current PBB.  In  this  plot, the  groups  of  structures 
   from  different  sources  are  distinguished  by  different colours, which can be  used to check whether the  Z-score of  the input  structure is  within  the range  of  the source typically found for the native proteins of similar size. The 
   value of Z-score is highlighted as a black dot in the figure below .
-  The Z score value of the obtained model  is -4.87. 
-
-  A Z-score of -4.87 suggests that the model's energy is significantly lower (i.e., more negative) than the average energy of experimental structures of similar size. In the context of ProSA-web, a lower Z-score indicates a higher likelihood of the model being erroneous or having structural irregularities. Typically, a Z-score below -4 indicates potential issues with the model's structure, suggesting that it may contain inaccuracies or distortions.
-
-  Therefore, based on the ProSA-web analysis, the model may have structural problems that need to be addressed. Further refinement or optimization techniques, such as molecular dynamics simulations or energy minimization, may be necessary to improve the model's quality and reliability.
+  The Z score value of the obtained model  is -7.93,which falls within the range of those of the PDB native structures.
 
 <p align="center">
   <img src="images/res.png" alt="Image"
@@ -135,6 +130,7 @@ The overall quality and the individual regions of the a model should
 </p>
  
  - **Local model quality** 
+  the amino acids local energy profile plot (figure below)  showed that all the residues across the sequence have negative values  indicating favorable amino acid energy profile, high accuracy and reliability of the model
 
 <p align="center">
   <img src="images/local.png" alt="Image"
@@ -154,56 +150,58 @@ align mob_model, reference
 ```
  - PyMOL uses a two-step approach for aligning structures: first, it performs a sequence alignment, and then it minimizes the Root Mean Square Deviation (RMSD) between the aligned residues. As a result, you will get the structures aligned in the display and something like this will be printed to the console.
  
- ```
-  Match: read scoring matrix.
- Match: assigning 396 x 449 pairwise scores.
- MatchAlign: aligning residues (396 vs 449)...
- MatchAlign: score 1356.500
- ExecutiveAlign: 280 atoms aligned.
- ExecutiveRMS: 25 atoms rejected during cycle 1 (RMSD=8.61).
- ExecutiveRMS: 20 atoms rejected during cycle 2 (RMSD=6.51).
- ExecutiveRMS: 23 atoms rejected during cycle 3 (RMSD=4.99).
- ExecutiveRMS: 19 atoms rejected during cycle 4 (RMSD=3.54).
- ExecutiveRMS: 13 atoms rejected during cycle 5 (RMSD=2.51).
- Executive: RMSD =    2.010 (180 to 180 atoms) 
+ 
 ```
-the RMSD value of 21.537 Å suggests a relatively high level of deviation between the model (mob_model) and the reference structure. Ideally, a lower RMSD value indicates better structural similarity. The rejection of a few atoms during the alignment process may indicate areas of discrepancy or misalignment between the model and the reference structure.
+PyMOL>align mob_template, reference
+ Match: read scoring matrix.
+ Match: assigning 447 x 448 pairwise scores.
+ MatchAlign: aligning residues (447 vs 448)...
+ MatchAlign: score 2421.000
+ ExecutiveAlign: 447 atoms aligned.
+ ExecutiveRMS: 29 atoms rejected during cycle 1 (RMSD=2.65).
+ ExecutiveRMS: 23 atoms rejected during cycle 2 (RMSD=1.28).
+ ExecutiveRMS: 14 atoms rejected during cycle 3 (RMSD=0.92).
+ ExecutiveRMS: 9 atoms rejected during cycle 4 (RMSD=0.83).
+ ExecutiveRMS: 6 atoms rejected during cycle 5 (RMSD=0.79).
+ Executive: RMSD =    0.772 (366 to 366 atoms)
+ 
+ ```
+The structural alignment showed an RMSD of 0.772 indicating that the model had a very high structural similarity with the crystal structure 1AQM and thus reliable and suitable for the study
 <p align="center">
   <img src="images/align2.png" alt="Image" />
 </p>
 
 
- -In the same manner align the structure of the template with the crystal structure 1KXQ:
+ -In the same manner align the structure of the template with the crystal structure 1AMQ:
 
 
 
  ```sh
-select mob_template, 1KXQ and name CA
+select mob_template, 1c8q  and name CA
 align mob_template, reference
 ```
 
 
 ```
-PyMOL>align mob_template, reference
+ PyMOL>align mob_model, reference
  Match: read scoring matrix.
- Match: assigning 2468 x 449 pairwise scores.
- MatchAlign: aligning residues (2468 vs 449)...
- MatchAlign: score 1109.000
+ Match: assigning 495 x 449 pairwise scores.
+ MatchAlign: aligning residues (495 vs 449)...
+ MatchAlign: score 1055.500
  ExecutiveAlign: 441 atoms aligned.
- ExecutiveRMS: 32 atoms rejected during cycle 1 (RMSD=3.48).
- ExecutiveRMS: 36 atoms rejected during cycle 2 (RMSD=1.58).
- ExecutiveRMS: 19 atoms rejected during cycle 3 (RMSD=0.87).
- ExecutiveRMS: 18 atoms rejected during cycle 4 (RMSD=0.71).
- ExecutiveRMS: 14 atoms rejected during cycle 5 (RMSD=0.63).
- Executive: RMSD =    0.578 (322 to 322 atoms)
+ ExecutiveRMS: 33 atoms rejected during cycle 1 (RMSD=2.88).
+ ExecutiveRMS: 28 atoms rejected during cycle 2 (RMSD=1.41).
+ ExecutiveRMS: 18 atoms rejected during cycle 3 (RMSD=0.87).
+ ExecutiveRMS: 15 atoms rejected during cycle 4 (RMSD=0.75).
+ ExecutiveRMS: 6 atoms rejected during cycle 5 (RMSD=0.68).
+ Executive: RMSD =    0.659 (341 to 341 atoms)
+ 
  ```
- The alignment process involved assigning pairwise scores for 2468 x 449 residue pairs, resulting in a final alignment score of 1109.000. A total of 441 atoms were successfully aligned, with a Root Mean Square Deviation (RMSD) of 0.578 Å calculated for 322 aligned atoms.
-
-  During the alignment process, some atoms were rejected in multiple cycles due to larger deviations, but ultimately, a high-quality alignment with a low RMSD was achieved.                                                                                                                                                                                                        These results indicates that the structures of the two proteins are similar, with the majority of their atoms aligning closely. This suggests a degree of structural conservation between the two proteins, which can be valuable for understanding their functional relationships, evolutionary history, and potential implications for protein engineering or drug design.                                                                                                   By aligning proteins phylogenetically, we can infer evolutionary relationships based on structural similarities. Proteins with higher structural similarity are likely to share a more recent common ancestor, indicating a closer evolutionary relationship. Conversely, proteins with lower structural similarity may have diverged further in evolutionary history.
+ The RMSD  values obtained from structural alignments provide insights into the similarity between different protein structures. In this case, the RMSD of 0.659 Å between the crystal (real) model and the template suggests a relatively close structural alignment, indicating a high degree of similarity between the two structures. Similarly, the comparative model-template model generated from the template also exhibits a low RMSD of 0.772 Å compared to the crystal structure, indicating a good structural resemblance between the comparative model and the real structure. These low RMSD values suggest that the generated models closely mimic the structure of the template and the real crystal structure. However, it's important to note that even small deviations in RMSD values can indicate differences in local structural details, which may impact functional properties or interactions. Therefore, while the overall alignment appears favorable, further analysis of specific regions and functional implications may be necessary to fully assess the quality and accuracy of the models.
 
  <p align="center">
   <img src="images/pymol2.png" alt="Image" />
 </p>
+                                                        >In conclusion, the project involved various stages of protein structure prediction and analysis, including homology modeling, structural alignment, and quality assessment. Through homology modeling, comparative models were generated based on template structures 1C8Q", providing valuable insights into the 3D structure of the target protein   . Structural alignment with the crystal (real) structure '1AMQ' and template structures revealed low RMSD values, indicating close structural resemblance between the generated models and the real protein structure. Additionally, quality assessment metrics such as Ramachandran plot analysis and Z-score were utilized to evaluate the accuracy and reliability of the models. Overall, the project demonstrated the effectiveness of homology modeling techniques in predicting protein structures and provided valuable information for further research and analysis in structural biology and drug discovery efforts. However, continuous refinement and validation of the models may be necessary to improve their accuracy and reliability for practical applications.
 
 
- >The Homology Modeling Project aimed to predict the 3D structure of α-amylase from Alteromonas haloplanktis using computational methods and compare it with experimental data. Following template selection, pairwise alignment, and model building, the generated models were evaluated for quality. Despite deviations in stereochemical properties, the project demonstrated the potential of homology modeling. Alignment with experimental structures showed promising structural conservation. Overall, while further refinement is needed, the project provides valuable insights into protein structure-function relationships and evolutionary conservation.
